@@ -19,6 +19,8 @@ class TablePackage extends Migration
             $table->string('type');
             $table->integer('price');
             $table->integer('price_org');
+            $table->integer('quantity')->default(1);
+            $table->integer('package_time')->default(0);//time using this package
             $table->timestamps();
         });
     }

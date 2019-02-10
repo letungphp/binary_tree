@@ -66,20 +66,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
 
-        if(isset($data['parent_user']) || $data['parent_user'] != ''){
-            $parent = \App\User::find($data['parent_user']);
+        $use_binary_tree = config('user.use_binary_tree');
 
-            if(!$parent){
-                exit;
-            }
-
-            $parent_binary = DB::table('binary_trees')->where('child',$parent_id)->first();
-            $parent_id = $data['parent_user'];
-
-            //Check parent's child count
-        }else{
-            $parent_id = 0;
-        }
+        DB::beginTransaction();
 
         $user = User::create([
             'name' => $data['name'],
@@ -87,9 +76,31 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
         ]);
 
-        if($user){
+        if($user && $use_binary_tree){
+
+            if(isset($data['parent_user']) && $data['parent_user'] != ''){
+
+                if(is_numeric($data['parent_user'])){
+                    $parent = User::where('id',$data['parent_user'])->first();
+                }elseif(filter_var($data['parent_user'], FILTER_VALIDATE_EMAIL)){
+                    $parent = User::where('email',$data['parent_user'])->first();
+                }
+
+                if(!$parent){
+                    DB::rollBack();
+                    throw new \Exception('Parent does not exits!');
+                }
+
+                $parent_binary = DB::table('user_binary_trees')->where('child',$parent->id)->first();
+                $parent_id = $parent->id;
+
+                //Check parent's child count
+            }else{
+                $parent_id = 0;
+            }
+     
             //Create tree
-            $tree = DB::table('trees')->insert(
+            $tree = DB::table('user_trees')->insert(
                 [
                     'parent' => $parent_id,
                     'child'  => $user->id,
@@ -111,8 +122,9 @@ class RegisterController extends Controller
             $depth_to_me = explode(',', $depth_to_me);
             $depth_to_me = count($depth_to_me);
 
+
             //Create binary tree
-            $binary = DB::table('binary_trees')->insert(
+            $binary = DB::table('user_binary_trees')->insert(
                 [
                     'parent'        => $parent_id,
                     'child'         => $user->id,
@@ -123,8 +135,9 @@ class RegisterController extends Controller
                     'updated_at'    => date('Y-m-d H:i:s')
                 ]
             );
-            
         }
+
+        DB::commit();
 
         return $user;
     }

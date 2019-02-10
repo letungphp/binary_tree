@@ -13,11 +13,21 @@ class TableUserBuy extends Migration
      */
     public function up()
     {
-        Schema::create('user_buys', function (Blueprint $table) {
+        Schema::create('user_buy_packages', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->integer('package_id');
-            $table->date('buy_at');
+            $table->date('expired_at')->null();
+            $table->integer('price');
+            $table->integer('price_org');
+            $table->integer('is_active')->default(0);
+            $table->timestamps();
+        });
+
+        Schema::create('user_buy_posts', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->integer('post_id');
             $table->date('expired_at')->null();
             $table->integer('price');
             $table->integer('price_org');

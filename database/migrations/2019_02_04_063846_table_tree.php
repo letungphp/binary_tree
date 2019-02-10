@@ -13,14 +13,14 @@ class TableTree extends Migration
      */
     public function up()
     {
-        Schema::create('trees', function (Blueprint $table) {
+        Schema::create('user_trees', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('parent');
             $table->integer('child');
             $table->timestamps();
         });
 
-        Schema::create('binary_trees', function (Blueprint $table1) {
+        Schema::create('user_binary_trees', function (Blueprint $table1) {
             $table1->increments('id');
             $table1->integer('parent');
             $table1->integer('child');
@@ -39,7 +39,7 @@ class TableTree extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('trees');
-        Schema::dropIfExists('binary_trees');
+        Schema::dropIfExists('user_trees');
+        Schema::dropIfExists('user_binary_trees');
     }
 }

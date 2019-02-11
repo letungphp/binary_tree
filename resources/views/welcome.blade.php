@@ -83,16 +83,34 @@
                 <div class="title m-b-md">
                     {{ config('app.name', 'Laravel') }}
                 </div>
+                <p style="width:100%;text-align: center;">Find and share your items to the world</p>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <a href="{{route('market',['category'=>'real-estate'])}}">Real estate</a>
+                    <a href="{{route('market',['category'=>'technology'])}}">Buy and sell technology equipment</a>
+                    <a href="{{route('market',['category'=>'fashion'])}}">Buy and sell fashion</a>
+                    <a href="{{route('market',['category'=>'food'])}}">Buy and sell food</a>
+                    <a href="{{route('market',['category'=>'other'])}}">Other</a>
+                    <a href="https://github.com/laravel/laravel">Need Support ?</a>
                 </div>
             </div>
         </div>
     </body>
+<script>
+var x = document.getElementById("demo");
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    x.innerHTML = "Geolocation is not supported by this browser.";
+  }
+}
+
+function showPosition(position) {
+  console.log("Latitude: " + position.coords.latitude + 
+  "<br>Longitude: " + position.coords.longitude);
+}
+getLocation();
+</script>
 </html>

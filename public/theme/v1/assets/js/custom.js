@@ -145,7 +145,7 @@ function initMap() {
 
     var myLatlng = new google.maps.LatLng(lat, lng);
     var mapOptions = {
-        zoom: 12,
+        zoom: 17,
         scrollwheel: false,
         center: myLatlng,
         mapTypeId: google.maps.MapTypeId.ROADMAP,
@@ -161,8 +161,8 @@ function initMap() {
         title: 'Hello World!'
     });
 
-    var contentString = '<div class="info-window-content"><h2>Argon Dashboard</h2>' +
-        '<p>A beautiful Dashboard for Bootstrap 4. It is Free and Open Source.</p></div>';
+    var contentString = '<div class="info-window-content"><h2>Địa điểm bạn đang đứng</h2>' +
+        '<p>Dựa và thông tin cung cấp từ trình duyệt</p></div>';
 
     var infowindow = new google.maps.InfoWindow({
         content: contentString

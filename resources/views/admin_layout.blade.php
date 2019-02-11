@@ -30,7 +30,9 @@
   <!-- Optional JS -->
   <script src="{{url('/')}}/theme/v1/assets/vendor/chart.js/dist/Chart.min.js"></script>
   <script src="{{url('/')}}/theme/v1/assets/vendor/chart.js/dist/Chart.extension.js"></script>
+  <!-- Optional JS -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBd3PjUqq81lIOfBPYXrQGWwK5T4ystZjA"></script>
   <!-- Argon JS -->
-  <script src="{{url('/')}}/theme/v1/assets/js/argon.js?v=1.0.0"></script>
+  <script src="{{url('/')}}/theme/v1/assets/js/custom.js?v=1.0.0"></script>
 </body>
 </html>

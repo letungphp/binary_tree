@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/market/{category}', 'SearchController@index')->name('market');
 
 //Post
 Route::get('/posts', 'HomeController@index')->name('post.list');
